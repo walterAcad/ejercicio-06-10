@@ -1,0 +1,10 @@
+Backend (Express.js) 
+●  Configurar servidor Express con CORS y middleware JSON 
+
+●  Implementar endpoint GET /api/tasks que retorne todas las tareas 
+●  Implementar endpoint POST /api/tasks para crear nuevas tareas 
+●  Implementar endpoint PUT /api/tasks/:id para actualizar tareas existentes 
+●  Implementar endpoint DELETE /api/tasks/:id para eliminar tareas 
+●  Estructura de tarea: { id, title, completed } 
+●  Manejo de errores: Respuestas apropiadas para recursos no encontrados
+
