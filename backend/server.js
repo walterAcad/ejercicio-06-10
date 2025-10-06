@@ -4,23 +4,32 @@ const puerto = process.env.PORT || 5000;
 const taskRouter = require("./routes/taskRoutes");
 const app = express();
 
-app.use(express.json);
+// Middleware
+app.use(express.json());
 app.use(cors());
 
-app.use("/api/task", taskRouter);
+// Rutas
+app.use("/api", taskRouter);
 
+// Middleware para rutas no encontradas
 app.use((req, res, next) => {
-  const error = new Error(`ruta no encontrada: ${req.originalUrl}`);
+  const error = new Error(`Ruta no encontrada: ${req.originalUrl}`);
   error.status = 404;
   next(error);
 });
 
+// Middleware de manejo de errores
 app.use((err, req, res, next) => {
-  const statusCode = err.statusCode || 500;
-  const message = err.message || "Error de servidor.";
+  const statusCode = err.statusCode || err.status || 500;
+  const message = err.message || "Error interno del servidor";
   console.error({ statusCode, message, stack: err.stack });
-  res.status(statusCode).json({ error: message });
+  res.status(statusCode).json({ 
+    error: message,
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
+  });
 });
+
+// Iniciar servidor
 app.listen(puerto, () => {
-  console.log(`El servidor esta corriendo en el puerto: ${puerto}`);
+  console.log(`El servidor está corriendo en el puerto: ${puerto}`);
 });
