@@ -1,5 +1,5 @@
 import React from "react";
-import ListaTareas from "./components/ListaTareas"; // ajustá la ruta según tu proyecto
+import ListaTareas from "./components/ListaTareas"; 
 import './App.css';
 
 function App() {
